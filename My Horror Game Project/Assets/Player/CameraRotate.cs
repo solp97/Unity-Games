@@ -8,9 +8,16 @@ public class CameraRotate : MonoBehaviour
     public Transform player;
     float xRotation = 0f;
 
-
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     void Update()
     {
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
         float mouseX = Input.GetAxis("Mouse X") * turnSpeed;
         float mouseY = Input.GetAxis("Mouse Y") * turnSpeed;
 
