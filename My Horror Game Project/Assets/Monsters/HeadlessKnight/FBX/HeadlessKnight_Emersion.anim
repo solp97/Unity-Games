@@ -56455,7 +56455,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 2.0416667
+        time: 2.5833333
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -56492,7 +56492,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 5.5833335
+        time: 4.375
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -56504,7 +56504,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: mo/Head
+    path: HeadlessKnight/Root/Bip01/Bip01-Pelvis/Bip01-Spine/Bip01-Spine1/Bip01-Spine2/Bip01-Neck/Bip01-Head/Magic
+      fire pro blue
     classID: 1
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -56551,7 +56552,7 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 3954930111
+      path: 3036745432
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -113899,7 +113900,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 2.0416667
+        time: 2.5833333
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -113936,7 +113937,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 5.5833335
+        time: 4.375
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -113948,7 +113949,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: mo/Head
+    path: HeadlessKnight/Root/Bip01/Bip01-Pelvis/Bip01-Spine/Bip01-Spine1/Bip01-Spine2/Bip01-Neck/Bip01-Head/Magic
+      fire pro blue
     classID: 1
     script: {fileID: 0}
   m_EulerEditorCurves: []
