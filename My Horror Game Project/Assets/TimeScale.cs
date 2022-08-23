@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class TimeScale : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    CameraRotate cameraRotate;
+
+    private void OnEnable()
     {
+        Cursor.lockState = CursorLockMode.None;
+        cameraRotate.turnSpeed = 0f;
         Time.timeScale = 0f;
     }
 
     public void unTimeScale()
     {
+        cameraRotate.turnSpeed = 4f;
         Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
     }
+
+
 }
