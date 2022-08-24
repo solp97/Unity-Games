@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TimeScale : MonoBehaviour
 {
-    CameraRotate cameraRotate;
-
+    public CameraRotate cameraRotate;
+    public GameObject[] destroyThisObjects;
     private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -13,12 +13,17 @@ public class TimeScale : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void unTimeScale()
+    private void OnDisable()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         cameraRotate.turnSpeed = 4f;
         Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
     }
-
-
+    public void Destroy()
+    {
+        for(int i = 0; i < destroyThisObjects.Length; i++)
+        {
+            Destroy(destroyThisObjects[i]);
+        }
+    }
 }
