@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChaserSounds : MonoBehaviour
+public class MyCams : MonoBehaviour
 {
+    public GameObject main;
+    public GameObject cutScene;
+    public GameObject cutSceneVcam;
+
     // Start is called before the first frame update
     void Start()
     {
