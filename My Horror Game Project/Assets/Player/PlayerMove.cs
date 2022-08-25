@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public CharacterController characterController; 
+    private CharacterController characterController; 
+    private StaminaController staminaController;
+
     public float moveSpeed = 4f;
+    public bool running;
     public float runSpeed = 10f;
     public float jumpPower = 5f;
     public float stamina = 100f;
@@ -20,12 +23,22 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private int drainedCount;
     [SerializeField] private bool canRun = true;
 
-
+    private void Start()
+    {
+        characterController = GetComponent<CharacterController>();
+        staminaController = GetComponent<StaminaController>();
+    }
 
     void Update()
     {
         Run();
-        
+        staminaController.StaminaUp();
+        if(stamina > 10 )
+        {
+            canRun = true;
+        }
+
+
         isGround = Physics.CheckSphere(groundCheck.position, groundDist, groundMask);
         if (isGround && velocity.y < 0)
         {
@@ -48,10 +61,14 @@ public class PlayerMove : MonoBehaviour
 
     void Run()
     {
-        if(canRun) moveSpeed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : 4f;
+        moveSpeed = Input.GetKey(KeyCode.LeftShift)&& canRun ? runSpeed : 4f;
 
-        stamina += Input.GetKey(KeyCode.LeftShift) ? -0.15f : 0.03f;
 
+        if(Input.GetKey(KeyCode.LeftShift)&& moveSpeed > 4)
+        {
+            staminaController.StaminaDown();
+            running = true;
+        }
         if(stamina <= 0)
         {
             stamina = 0;
@@ -61,20 +78,6 @@ public class PlayerMove : MonoBehaviour
         else if(stamina >=100f)
         {
             stamina = 100f;
-            canRun = true;
-        }
-
-        switch (drainedCount)
-        {
-            case 0:
-                runSpeed = 10;
-                break;
-            case 1:
-                runSpeed = 7;
-                break;
-            case 2:
-                runSpeed = 4;
-                break;
         }
     }
 }
