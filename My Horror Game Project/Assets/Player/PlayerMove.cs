@@ -69,10 +69,10 @@ public class PlayerMove : MonoBehaviour
             case 0:
                 runSpeed = 10;
                 break;
-            case 200:
+            case 1:
                 runSpeed = 7;
                 break;
-            case 500:
+            case 2:
                 runSpeed = 4;
                 break;
         }

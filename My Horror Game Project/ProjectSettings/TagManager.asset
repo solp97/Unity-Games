@@ -8,6 +8,9 @@ TagManager:
   - Red
   - Green
   - Blue
+  - Key
+  - Statue
+  - Board
   layers:
   - Default
   - TransparentFX

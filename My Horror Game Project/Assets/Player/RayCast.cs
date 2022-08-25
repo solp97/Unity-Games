@@ -1,38 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class RayCast : MonoBehaviour
 {
-    public GameObject KeyInterpace;
-    public GameObject StatueInterpace;
-    public GameObject BoardInterpace;
+    public Text text;
+    public GameObject textObject;
+    UnityEvent interact;
 
 
     void Update()
     {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
+        Debug.DrawRay(transform.position, forward, Color.green);
+
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(Camera.main.transform.position,Camera.main.transform.forward, out hit ,2,7))
         {
-            var selectItem = hit.transform;
-            Debug.Log("감지중");
-            if (selectItem.CompareTag("Key"))
+            if(hit.collider.GetComponent<Interactable>() != false)
             {
-                Debug.Log("키 감지");
-                KeyInterpace.SetActive(true);
-            }
-            if (selectItem.CompareTag("Statue"))
-            {
-                Debug.Log("동상 감지");
-                StatueInterpace.SetActive(true);
-            }
-            if (selectItem.CompareTag("Board"))
-            {
-                Debug.Log("보드판 감지");
-                BoardInterpace.SetActive(true);
+                interact = hit.collider.GetComponent<Interactable>().onInteract;
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    interact.Invoke();
+                }
+                
             }
 
         }
+
+    }
+
+    void ChangeText()
+    {
+        text.text = "'F'를 눌러 상호작용";
+        text.fontSize = 40;
     }
 }
