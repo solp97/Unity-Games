@@ -8,7 +8,8 @@ public class PlayerMove : MonoBehaviour
     private StaminaController staminaController;
 
     public float moveSpeed = 4f;
-    public bool running;
+    public bool isRun;
+    public bool isMove;
     public float runSpeed = 10f;
     public float jumpPower = 5f;
     public float stamina = 100f;
@@ -55,6 +56,8 @@ public class PlayerMove : MonoBehaviour
         float moveZ = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
+        if(moveX > 0 || moveZ > 0) isMove = true;
+        else isMove = false;
 
         characterController.Move(move * moveSpeed * Time.deltaTime);
     }
@@ -64,10 +67,10 @@ public class PlayerMove : MonoBehaviour
         moveSpeed = Input.GetKey(KeyCode.LeftShift)&& canRun ? runSpeed : 4f;
 
 
-        if(Input.GetKey(KeyCode.LeftShift)&& moveSpeed > 4)
+        if(Input.GetKey(KeyCode.LeftShift)&& isMove)
         {
             staminaController.StaminaDown();
-            running = true;
+            isRun = true;
         }
         if(stamina <= 0)
         {
