@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
 
     public GameObject menuUI;
-    int saveKeyCount;
-    int goldKeyCount;
+    public int saveDiskCount;
+    public int goldKeyCount;
     public CameraRotate camera;
 
     // Start is called before the first frame update
     void Start()
     {
-        saveKeyCount = 0;
+        saveDiskCount = 0;
         goldKeyCount = 0; ;
     }
 
@@ -44,5 +44,16 @@ public class GameManager : MonoBehaviour
     public void GameExit()
     {
         Application.Quit();
+    }
+
+   public void GoldKeyCount()
+    {
+        goldKeyCount++;
+    }
+
+    public void SaveDiskCount()
+    {
+        saveDiskCount++;
+
     }
 }

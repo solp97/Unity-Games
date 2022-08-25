@@ -14,16 +14,6 @@ public class CameraRotate : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKey(KeyCode.F))
-        {
-            Cursor.lockState = CursorLockMode.None;
-            turnSpeed = 0.5f;
-        }
-        if(Input.GetKeyDown(KeyCode.LeftAlt) && Cursor.lockState == CursorLockMode.None)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            turnSpeed = 4f;
-        }
         float mouseX = Input.GetAxis("Mouse X") * turnSpeed;
         float mouseY = Input.GetAxis("Mouse Y") * turnSpeed;
 
