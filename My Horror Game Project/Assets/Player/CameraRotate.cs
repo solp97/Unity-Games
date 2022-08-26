@@ -22,4 +22,10 @@ public class CameraRotate : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         player.Rotate(Vector3.up * mouseX);
     }
+
+    public void returnTurnSpeed ()
+    {
+        turnSpeed = 4.0f;
+        Cursor.lockState = CursorLockMode .Locked;
+    }
 }

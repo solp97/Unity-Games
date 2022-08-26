@@ -60,7 +60,5 @@ public class RayCast : MonoBehaviour
 
         }
         else textObject.SetActive(false);
-
-
     }
 }
