@@ -33,9 +33,10 @@ public class AIChaser : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        navmeshagent.speed = 0f;
+        
         if (other.CompareTag("Player"))
         {
+            navmeshagent.speed = 0f;
             animator.SetBool("Chase Player", false);
             Attack();
         }

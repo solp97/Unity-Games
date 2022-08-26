@@ -10,14 +10,16 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 4f;
     public bool isRun;
     public bool isMove;
+    public bool isInSaveZone;
+
     public float runSpeed = 10f;
     public float jumpPower = 5f;
     public float stamina = 100f;
 
-    public float groundDist = 0.2f;
     public LayerMask groundMask;
     public Transform groundCheck;
 
+    private float groundDist = 0.2f;
     private float gravity = -9.81f;
     private Vector3 velocity;
     private bool isGround;
@@ -28,6 +30,7 @@ public class PlayerMove : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         staminaController = GetComponent<StaminaController>();
+        isInSaveZone = false;
     }
 
     void Update()
@@ -45,10 +48,12 @@ public class PlayerMove : MonoBehaviour
         {
             velocity.y = -2f;
         }
+
         if(Input.GetButtonDown("Jump") && isGround )
         {
             velocity.y = Mathf.Sqrt(jumpPower * -2f * gravity);
         }
+
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity*Time.deltaTime);
 

@@ -5,20 +5,19 @@ using UnityEngine;
 public class ChageOpenGate : MonoBehaviour
 {
     Material mat;
+    public int needkey;
     private void Start()
     {
-        mat = GetComponent<Material>();
+     
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        switch (GameManager.Instance.goldKeyCount)
+        if (GameManager.Instance.goldKeyCount >= needkey)
         {
-            case 2:
-                Destroy(this.gameObject);
-                break;
+            Destroy(this.gameObject);
         }
+        
     }
 }
