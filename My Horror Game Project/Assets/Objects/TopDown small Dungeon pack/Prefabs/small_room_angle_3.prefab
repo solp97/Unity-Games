@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4049984064202848}
   - component: {fileID: 33619373941820840}
   - component: {fileID: 23321781546083182}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flor_to_wall_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 4985814519392468}
   - component: {fileID: 33681341986490104}
   - component: {fileID: 23482070326001592}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flor_clean (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 4907476546106454}
   - component: {fileID: 33822642191413676}
   - component: {fileID: 23727289892121982}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flor_to_wall_down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -710,7 +710,7 @@ GameObject:
   - component: {fileID: 4174107192045830}
   - component: {fileID: 33254428702113522}
   - component: {fileID: 23467993514364788}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flor_to_wall_angle_down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1222,7 +1222,7 @@ GameObject:
   - component: {fileID: 4495781323188514}
   - component: {fileID: 33455284866857172}
   - component: {fileID: 23320485817271368}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flor_to_wall_angle_down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1785,7 +1785,7 @@ GameObject:
   - component: {fileID: 33569586416647140}
   - component: {fileID: 23929917681061328}
   - component: {fileID: 2640496087449662609}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flor_to_wall_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2013,7 +2013,7 @@ GameObject:
   - component: {fileID: 4539756152028450}
   - component: {fileID: 33958442846098486}
   - component: {fileID: 23542209027239296}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flor_to_wall_down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2396,7 +2396,7 @@ GameObject:
   - component: {fileID: 33314686298469170}
   - component: {fileID: 23696706102102288}
   - component: {fileID: 4125846054696735075}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flor_to_wall_down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2603,7 +2603,7 @@ GameObject:
   - component: {fileID: 4382051336823754}
   - component: {fileID: 33428732010200666}
   - component: {fileID: 23424138293593526}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flor_to_wall_down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2722,7 +2722,7 @@ GameObject:
   - component: {fileID: 4197625165668906}
   - component: {fileID: 33719494340011174}
   - component: {fileID: 23966158670208770}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flor_clean (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2971,7 +2971,7 @@ GameObject:
   - component: {fileID: 4830024291072698}
   - component: {fileID: 33020329425984440}
   - component: {fileID: 23267684924551100}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flor_clean (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3054,7 +3054,7 @@ GameObject:
   - component: {fileID: 4696420784788262}
   - component: {fileID: 33525467120225172}
   - component: {fileID: 23547638899618286}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flor_to_wall_down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3325,7 +3325,7 @@ GameObject:
   - component: {fileID: 33089116476922490}
   - component: {fileID: 23868828778923728}
   - component: {fileID: 2242855828470295149}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flor_to_wall_angle_down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3539,7 +3539,7 @@ GameObject:
   - component: {fileID: 4620984772842452}
   - component: {fileID: 33429205844092788}
   - component: {fileID: 23698847112855644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flor_to_wall_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3867,7 +3867,7 @@ GameObject:
   - component: {fileID: 33926131224337706}
   - component: {fileID: 23377140235966494}
   - component: {fileID: 1806299886096066587}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flor_to_wall_angle_down
   m_TagString: Untagged
   m_Icon: {fileID: 0}

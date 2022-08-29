@@ -5,6 +5,7 @@ using UnityEngine;
 public class WriteBoard : MonoBehaviour
 {
     public CameraRotate camera;
+    public Light light;
     private void Update()
     {
         if(this.gameObject && Input.GetKeyDown(KeyCode.Return))
@@ -13,6 +14,7 @@ public class WriteBoard : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1f;
             camera.turnSpeed = 4f;
+            light.intensity = 10;
         }
     }
 }
