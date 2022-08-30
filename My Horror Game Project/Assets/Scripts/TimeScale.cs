@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TimeScale : MonoBehaviour
 {
-    public CameraRotate cameraRotate;
     public GameObject[] destroyThisObjects;
     private void OnEnable()
     {

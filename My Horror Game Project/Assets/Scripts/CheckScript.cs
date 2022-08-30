@@ -6,12 +6,10 @@ using UnityEngine.UI;
 public class CheckScript : MonoBehaviour
 {
     public GameObject[] ToggleUIObjs;
-    public CameraRotate cameraRotate;
-    public PlayerMove player;
     private void OnTriggerEnter(Collider other)
     {
         Time.timeScale = 0f;
-        player.isMove = false;
+        Cursor.lockState = CursorLockMode.None;
         for(int i = 0; i < ToggleUIObjs.Length; i++)
         {
             ToggleUIObjs[i].SetActive(true);

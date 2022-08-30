@@ -9,6 +9,7 @@ public class AIChaser : MonoBehaviour
     public int nowStatus = (int)ChaserStatus.Chase;
     public int RageStartKeyCount = 2;
     public float moveSpeed = 3f;
+    public SaveZone saveZone;
     private NavMeshAgent navmeshagent;
     private Animator animator;
     private bool _isAttack;
@@ -28,6 +29,15 @@ public class AIChaser : MonoBehaviour
         if(GameManager.Instance.goldKeyCount >= RageStartKeyCount)
         {
             nowStatus = (int)ChaserStatus.Rage;
+        }
+
+        if(saveZone.isPlayerInSaveZone == true)
+        {
+            navmeshagent.speed = 0.1f;
+        }
+        else
+        {
+            navmeshagent.speed = moveSpeed;
         }
     }
 

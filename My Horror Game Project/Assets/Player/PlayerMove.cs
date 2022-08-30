@@ -12,14 +12,18 @@ public class PlayerMove : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
+
     bool readyToJump;
+    bool readyToRun;
     public bool isMove = false;
+    public bool canMove = true;
 
     [HideInInspector] public float walkSpeed;
     [HideInInspector] public float sprintSpeed;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode runKey = KeyCode.LeftShift;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -34,33 +38,40 @@ public class PlayerMove : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
+    StaminaController staminaController;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        staminaController = GetComponent<StaminaController>();
         rb.freezeRotation = true;
 
         readyToJump = true;
+        readyToRun = true;
     }
 
     private void Update()
     {
-        // ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
+        if(canMove)
+        {
+            // ground check
+            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
-        MyInput();
-        SpeedControl();
+            MyInput();
+            SpeedControl();
 
-        // handle drag
-        if (grounded)
-            rb.drag = groundDrag;
-        else
-            rb.drag = 0;
+            // handle drag
+            if (grounded)
+                rb.drag = groundDrag;
+            else
+                rb.drag = 0;
+        }
+
     }
 
     private void FixedUpdate()
     {
-        MovePlayer();
+        if(canMove) MovePlayer();
     }
 
     private void MyInput()
@@ -77,11 +88,42 @@ public class PlayerMove : MonoBehaviour
 
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+
+        if (Input.GetKey(runKey) && isMove && readyToRun)
+        {
+            moveSpeed = 10f;
+            staminaController.StaminaDown();
+
+        }
+        else
+        {
+            staminaController.StaminaUp();
+            moveSpeed = 5f;
+        }
+        if(stamina <= 0)
+        {
+            stamina = 0;
+            readyToRun = false;
+        }
+        else if (stamina >= 20)
+        {
+            readyToRun = true;
+        }
+        else if(stamina >= 100)
+        {
+            stamina = 100;
+        }
+
+        if(horizontalInput < 0 || horizontalInput > 0 || verticalInput < 0 || verticalInput > 0)
+        {
+            isMove = true;
+        }
+
     }
 
     private void MovePlayer()
     {
-        isMove = true;
+        
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         // on ground

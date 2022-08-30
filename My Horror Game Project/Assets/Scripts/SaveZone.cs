@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class SaveZone : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool isPlayerInSaveZone = false;
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Player")) isPlayerInSaveZone =true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Player")) isPlayerInSaveZone = false;
     }
 }

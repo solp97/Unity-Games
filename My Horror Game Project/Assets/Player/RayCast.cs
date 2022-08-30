@@ -51,7 +51,10 @@ public class RayCast : MonoBehaviour
                 interact = hit.collider.GetComponent<Interactable>().onInteract;
                 if (Input.GetKeyDown(KeyCode.F))
                 {
+                    
                     Cursor.lockState = CursorLockMode.None;
+                    camera.rotateSpeed = 0;
+                    text.text = "";
                 interact.Invoke();
                 }
 
