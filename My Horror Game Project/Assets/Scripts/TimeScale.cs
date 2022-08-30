@@ -9,14 +9,12 @@ public class TimeScale : MonoBehaviour
     private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.None;
-        cameraRotate.turnSpeed = 0f;
         Time.timeScale = 0f;
     }
 
     private void OnDisable()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        cameraRotate.turnSpeed = 4f;
         Time.timeScale = 1f;
     }
     public void Destroy()

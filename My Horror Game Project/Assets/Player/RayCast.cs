@@ -52,8 +52,7 @@ public class RayCast : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     Cursor.lockState = CursorLockMode.None;
-                    camera.turnSpeed = 0f;
-                    interact.Invoke();
+                interact.Invoke();
                 }
 
             }

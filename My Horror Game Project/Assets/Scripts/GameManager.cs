@@ -32,14 +32,12 @@ public class GameManager : Singleton<GameManager>
         menuUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0.1f;
-        camera.turnSpeed = 0f;
     }
     public void GameContinue()
     {
         menuUI.SetActive(false);
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
-        camera.turnSpeed = 4f;
     }
     public void GameExit()
     {

@@ -13,7 +13,6 @@ public class WriteBoard : MonoBehaviour
             this.gameObject.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1f;
-            camera.turnSpeed = 4f;
             light.intensity = 10;
         }
     }

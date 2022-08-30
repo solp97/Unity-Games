@@ -1,91 +1,120 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class PlayerMove : MonoBehaviour
 {
-    private CharacterController characterController; 
-    private StaminaController staminaController;
+    [Header("Movement")]
+    public float moveSpeed;
 
-    public float moveSpeed = 4f;
-    public bool isRun;
-    public bool isMove;
-    public bool isInSaveZone;
+    public float groundDrag;
+    public float stamina;
+    public float jumpForce;
+    public float jumpCooldown;
+    public float airMultiplier;
+    bool readyToJump;
+    public bool isMove = false;
 
-    public float runSpeed = 10f;
-    public float jumpPower = 5f;
-    public float stamina = 100f;
+    [HideInInspector] public float walkSpeed;
+    [HideInInspector] public float sprintSpeed;
 
-    public LayerMask groundMask;
-    public Transform groundCheck;
+    [Header("Keybinds")]
+    public KeyCode jumpKey = KeyCode.Space;
 
-    private float groundDist = 0.2f;
-    private float gravity = -9.81f;
-    private Vector3 velocity;
-    private bool isGround;
-    [SerializeField] private int drainedCount;
-    [SerializeField] private bool canRun = true;
+    [Header("Ground Check")]
+    public float playerHeight;
+    public LayerMask whatIsGround;
+    bool grounded;
+
+    public Transform orientation;
+
+    float horizontalInput;
+    float verticalInput;
+
+    Vector3 moveDirection;
+
+    Rigidbody rb;
 
     private void Start()
     {
-        characterController = GetComponent<CharacterController>();
-        staminaController = GetComponent<StaminaController>();
-        isInSaveZone = false;
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
+
+        readyToJump = true;
     }
 
-    void Update()
+    private void Update()
     {
-        Run();
-        staminaController.StaminaUp();
-        if(stamina > 10 )
-        {
-            canRun = true;
-        }
+        // ground check
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
+        MyInput();
+        SpeedControl();
 
-        isGround = Physics.CheckSphere(groundCheck.position, groundDist, groundMask);
-        if (isGround && velocity.y < 0)
-        {
-            velocity.y = -2f;
-        }
-
-        if(Input.GetButtonDown("Jump") && isGround )
-        {
-            velocity.y = Mathf.Sqrt(jumpPower * -2f * gravity);
-        }
-
-        velocity.y += gravity * Time.deltaTime;
-        characterController.Move(velocity*Time.deltaTime);
-
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.right * moveX + transform.forward * moveZ;
-        if(moveX > 0 || moveZ > 0) isMove = true;
-        else isMove = false;
-
-        characterController.Move(move * moveSpeed * Time.deltaTime);
+        // handle drag
+        if (grounded)
+            rb.drag = groundDrag;
+        else
+            rb.drag = 0;
     }
 
-    void Run()
+    private void FixedUpdate()
     {
-        moveSpeed = Input.GetKey(KeyCode.LeftShift)&& canRun ? runSpeed : 4f;
+        MovePlayer();
+    }
 
+    private void MyInput()
+    {
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetKey(KeyCode.LeftShift)&& isMove)
+        // when to jump
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
-            staminaController.StaminaDown();
-            isRun = true;
+            readyToJump = false;
+
+            Jump();
+
+            Invoke(nameof(ResetJump), jumpCooldown);
         }
-        if(stamina <= 0)
+    }
+
+    private void MovePlayer()
+    {
+        isMove = true;
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+        // on ground
+        if (grounded)
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+
+        // in air
+        else if (!grounded)
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+    }
+
+    private void SpeedControl()
+    {
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        // limit velocity if needed
+        if (flatVel.magnitude > moveSpeed)
         {
-            stamina = 0;
-            drainedCount++;
-            canRun = false;
+            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
-        else if(stamina >=100f)
-        {
-            stamina = 100f;
-        }
+    }
+
+    private void Jump()
+    {
+        // reset y velocity
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+    private void ResetJump()
+    {
+        readyToJump = true;
     }
 }
+

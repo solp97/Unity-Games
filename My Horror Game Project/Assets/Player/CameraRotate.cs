@@ -4,28 +4,35 @@ using UnityEngine;
 
 public class CameraRotate : MonoBehaviour
 {
-    public float turnSpeed = 4.0f;
-    public Transform player;
-    float xRotation = 0f;
+    public float sensX;
+    public float sensY;
+    public float rotateSpeed;
+
+    public Transform orientation;
+
+    float xRotation;
+    float yRotation;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        rotateSpeed = 2f;
     }
-    void Update()
+
+    private void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * turnSpeed;
-        float mouseY = Input.GetAxis("Mouse Y") * turnSpeed;
+        // get mouse input
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX * rotateSpeed;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY * rotateSpeed;
+
+        yRotation += mouseX;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        player.Rotate(Vector3.up * mouseX);
-    }
 
-    public void returnTurnSpeed ()
-    {
-        turnSpeed = 4.0f;
-        Cursor.lockState = CursorLockMode .Locked;
+        // rotate cam and orientation
+        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }
 }
