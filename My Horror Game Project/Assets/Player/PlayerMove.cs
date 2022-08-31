@@ -6,17 +6,18 @@ public class PlayerMove : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
-
     public float groundDrag;
     public float stamina;
+
+    [Header("Jumping")]
     public float jumpForce;
     public float jumpCooldown;
-    public float airMultiplier;
-
     bool readyToJump;
+
     bool readyToRun;
     public bool isMove = false;
     public bool canMove = true;
+    public float swingSpeed;
 
     [HideInInspector] public float walkSpeed;
     [HideInInspector] public float sprintSpeed;
@@ -24,16 +25,35 @@ public class PlayerMove : MonoBehaviour
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode runKey = KeyCode.LeftShift;
+    public KeyCode grapKey = KeyCode.Mouse0;
 
     [Header("Ground Check")]
     public float playerHeight;
-    public LayerMask whatIsGround;
+    public LayerMask whatIsJumpable;
     bool grounded;
+
+    [Header("Camera Effects")]
+    public Camera cam;
+    public float grappleFov = 95f;
 
     public Transform orientation;
 
     float horizontalInput;
     float verticalInput;
+
+
+
+    public enum MovementState
+    {
+        grappling,
+        swinging
+    }
+
+    public bool freeze;
+
+    public bool activeGrapple;
+    public bool swinging;
+    public MovementState state;
 
     Vector3 moveDirection;
 
@@ -48,20 +68,38 @@ public class PlayerMove : MonoBehaviour
 
         readyToJump = true;
         readyToRun = true;
+
     }
 
-    private void Update()
+    private void StateHandler()
+    {
+        // Mode - Grappling
+        if (activeGrapple)
+        {
+            state = MovementState.grappling;
+            moveSpeed = sprintSpeed;
+        }
+
+        // Mode - Swinging
+        else if (swinging)
+        {
+            state = MovementState.swinging;
+            moveSpeed = swingSpeed;
+        }
+    }
+
+        private void Update()
     {
         if(canMove)
         {
             // ground check
-            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
+            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsJumpable);
 
             MyInput();
-            SpeedControl();
+            StateHandler();
 
             // handle drag
-            if (grounded)
+            if (grounded && !activeGrapple)
                 rb.drag = groundDrag;
             else
                 rb.drag = 0;
@@ -79,11 +117,10 @@ public class PlayerMove : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded && stamina > 30)
         {
             readyToJump = false;
-
+           
             Jump();
 
             Invoke(nameof(ResetJump), jumpCooldown);
@@ -126,37 +163,49 @@ public class PlayerMove : MonoBehaviour
         
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        // on ground
         if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-
-        // in air
-        else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
-    }
-
-    private void SpeedControl()
-    {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        // limit velocity if needed
-        if (flatVel.magnitude > moveSpeed)
-        {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
-        }
     }
 
     private void Jump()
     {
-        // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        staminaController.JumpStaminaDown();
     }
     private void ResetJump()
     {
         readyToJump = true;
+    }
+
+    private bool enableMovementOnNextTouch;
+    public void JumpToPosition(Vector3 targetPosition, float trajectoryHeight)
+    {
+        activeGrapple = true;
+        Invoke(nameof(SetVelocity), 0.1f);
+
+        Invoke(nameof(ResetRestrictions), 3f);
+    }
+
+    private Vector3 velocityToSet;
+    private void SetVelocity()
+    {
+        enableMovementOnNextTouch = true;
+        rb.velocity = velocityToSet;
+    }
+
+    public void ResetRestrictions()
+    {
+        activeGrapple = false;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (enableMovementOnNextTouch)
+        {
+            enableMovementOnNextTouch = false;
+            ResetRestrictions();
+        }
     }
 }
 

@@ -9,8 +9,9 @@ public class StaminaController : MonoBehaviour
 
     public Image staminUI;
     public GameObject Stamina;
-    public float runOutStamina = 0.2f;
-    public float FillStamina = 0.07f;
+    [SerializeField] private float runOutStamina = 0.3f;
+    [SerializeField] private float FillStamina = 0.05f;
+    [SerializeField] private float jumpOutStamina = 10f;
 
     private bool isUseStamina;
 
@@ -43,6 +44,11 @@ public class StaminaController : MonoBehaviour
     {
             playermove.stamina -= runOutStamina;
             staminUI.fillAmount -= runOutStamina * 0.01f;
+    }
+    public void JumpStaminaDown()
+    {
+        playermove.stamina -= jumpOutStamina;
+        staminUI.fillAmount -= jumpOutStamina * 0.01f;
     }
 
     public void StaminaUp()

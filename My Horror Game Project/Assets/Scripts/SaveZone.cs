@@ -8,11 +8,11 @@ public class SaveZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player")) isPlayerInSaveZone =true;
+        if (other.gameObject.CompareTag("Player")) isPlayerInSaveZone = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player")) isPlayerInSaveZone = false;
+        isPlayerInSaveZone = false;
     }
 }

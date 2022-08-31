@@ -17,7 +17,6 @@ public class CameraRotate : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        rotateSpeed = 2f;
     }
 
     private void Update()

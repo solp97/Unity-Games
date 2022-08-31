@@ -21,6 +21,7 @@ public class RayCast : MonoBehaviour
         Debug.DrawRay(transform.position, forward, Color.green);
 
         RaycastHit hit;
+
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 3, layerMask[0]))
         {
             text.text = "'E'¸¦ ´­·¯ È¹µæ";
