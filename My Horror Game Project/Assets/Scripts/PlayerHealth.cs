@@ -11,8 +11,14 @@ public class PlayerHealth : MonoBehaviour
         playerHealth = 2;
     }
 
+
+    void Damage(int dmg)
+    {
+        playerHealth -= dmg;
+    }
     public void Die()
     {
         callDeathUi.SetActive(true);
+        Time.timeScale = 0;
     }
 }

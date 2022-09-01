@@ -105,6 +105,8 @@ public class PlayerMove : MonoBehaviour
                 rb.drag = 0;
         }
 
+
+
     }
 
     private void FixedUpdate()
@@ -128,25 +130,25 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKey(runKey) && isMove && readyToRun)
         {
-            moveSpeed = 10f;
+            moveSpeed = 6f;
             staminaController.StaminaDown();
 
         }
         else
         {
             staminaController.StaminaUp();
-            moveSpeed = 5f;
+            moveSpeed = 3f;
         }
         if(stamina <= 0)
         {
             stamina = 0;
             readyToRun = false;
         }
-        else if (stamina >= 20)
+        if (stamina >= 20)
         {
             readyToRun = true;
         }
-        else if(stamina >= 100)
+        if(stamina >= 100)
         {
             stamina = 100;
         }

@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class KeyCountText : MonoBehaviour
 {
     private Text mytext;
-        private void Start()
+    private void Start()
     {
         mytext = GetComponent<Text>();
     }
-    private void OnEnable()
+    private void Update()
     {
-        mytext.text = "황금 열쇠: " + GameManager.Instance.goldKeyCount + "\n 황금 디스크:" + GameManager.Instance.saveDiskCount;
+        mytext.text = "황금 열쇠: " + GameManager.Instance.goldKeyCount + "\n황금 디스크:" + GameManager.Instance.saveDiskCount;
     }
+
 }

@@ -11,12 +11,11 @@ public class WriteBoard : MonoBehaviour
     {
         if(this.gameObject && Input.GetKeyDown(KeyCode.Return))
         {
-            move.canMove = true;
             this.gameObject.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
-            Time.timeScale = 1f;
             light.intensity = 10;
-            camera.rotateSpeed = 2f;
+            move.canMove = true;
+            camera.rotateSpeed = 1.5f;
         }
     }
 }
