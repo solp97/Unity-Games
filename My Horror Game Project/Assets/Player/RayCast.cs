@@ -37,6 +37,7 @@ public class RayCast : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     interact.Invoke();
+                    Cursor.visible = true;
                 }
 
             }
@@ -54,7 +55,7 @@ public class RayCast : MonoBehaviour
                 {
                     
                     Cursor.lockState = CursorLockMode.None;
-                    camera.rotateSpeed = 0;
+                    Cursor.visible = true;
                     text.text = "";
                 interact.Invoke();
                 }

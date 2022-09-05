@@ -14,6 +14,8 @@ public class TimeScale : MonoBehaviour
     }
     public void MouseLock()
     {
+        Time.timeScale = 1;
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 }

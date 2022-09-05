@@ -31,7 +31,6 @@ public class DrawRope : MonoBehaviour
 
     void GrapRope()
     {
-        //If not grappling, don't draw rope
         if (!grapplingGun.IsGrappling())
         {
             currentGrapplePosition = grapplingGun.gunTip.position;

@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             callMenu();
+            Cursor.visible = true;
             
         }
     }
@@ -36,6 +37,7 @@ public class GameManager : Singleton<GameManager>
     public void GameContinue()
     {
         menuUI.SetActive(false);
+        Cursor.visible = true;
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
     }

@@ -8,11 +8,17 @@ public class CheckScript : MonoBehaviour
     public GameObject[] ToggleUIObjs;
     private void OnTriggerEnter(Collider other)
     {
-       Cursor.lockState = CursorLockMode.None;
-        Debug.Log("마우스 보임");
-        for (int i = 0; i < ToggleUIObjs.Length; i++)
+        if (other.gameObject.CompareTag("Player"))
         {
-            ToggleUIObjs[i].SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Debug.Log("마우스 보임");
+            for (int i = 0; i < ToggleUIObjs.Length; i++)
+            {
+                ToggleUIObjs[i].SetActive(true);
+            }
+            Time.timeScale = 0.2f;
         }
+
     }
 }

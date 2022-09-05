@@ -9,8 +9,11 @@ public class SaveZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player")) isPlayerInSaveZone = true;
-        CountUI.SetActive(true);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            isPlayerInSaveZone = true;
+            CountUI.SetActive(true);
+        }
     }
 
     private void OnTriggerExit(Collider other)
