@@ -23,11 +23,6 @@ public class GrapScript : MonoBehaviour
         }
     }
 
-
-
-    /// <summary>
-    /// Call whenever we want to start a grapple
-    /// </summary>
     void StartGrapple()
     {
         RaycastHit hit;
@@ -37,14 +32,14 @@ public class GrapScript : MonoBehaviour
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = grapplePoint;
-
+            
             float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
 
-            //The distance grapple will try to keep from grapple point. 
             joint.maxDistance = distanceFromPoint * 0.8f;
             joint.minDistance = distanceFromPoint * 0.25f;
 
-            //Adjust these values to fit your game.
+
+
             joint.spring = 4.5f;
             joint.damper = 7f;
             joint.massScale = 4.5f;
